@@ -81,8 +81,10 @@ export const GlobalProvider = ({ children }) => {
   const [newArr,setNewArr]=useState([]);
 
   const fetchProducts =async (url) => {
-  const response = await axios
-        .get('/events?program_type=game')
+         // .get('/events?program_type=game')
+
+    const response = await axios
+         .get(url)
         .catch((err) => {
           console.log("Err: ", err);
         });
