@@ -6,7 +6,7 @@ import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 
 import Appointment from "../Appointment/Appointment";
 import WebinarEvent from "../WebinarEvent/WebinarEvent";
-// import "./CalendarScreen.scss";
+import "./CalendarScreen.scss";
 import EventForm from "../EventForm/EventForm";
 import SimpleModal from "../Modal/SimpleModal";
 import CustomToolbar from "./CustomComponent/ToolBar/CustomToolBar";
@@ -26,13 +26,7 @@ const localizer = momentLocalizer(moment);
 const CalendarScreen = () => {
 
   const { users } = useContext(GlobalContext);
- 
 
-
-  ///
-
-
-  ///
   // Get today's date
   const today = new Date();
   const tomorrow = new Date(today);
@@ -52,7 +46,7 @@ const CalendarScreen = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  //Initialize events with dynamic start and end dates based on today
+  // Initialize events with dynamic start and end dates based on today
   // const [events, setEvents] = useState([
   //   {
   //     id: 1,
@@ -83,40 +77,88 @@ const CalendarScreen = () => {
   //     description: "Meeting daily",
   //     color: "#FFE4C8",
   //   },
-  // //   // More events...
+  //   // More events...
   // ]);
 
-  const [events, setEvents] = useState([]);
 
-  useLayoutEffect(() => {
-    setEvents(users);
-   // console.log("users in calen");
-   // printEvents(users);
-  })
-  
-//setEvents([...events,users])
+
+  const [events, setEvents] = useState(users)
+
   // 
-  // const [events, setEvents] = useState(users);
+  const[url,setUrl]=useState('https://api-461776259687.us-west2.run.app/events?program_type=game');
+  // const fetchProducts =async (url) => {
+  
+  //     const response = await axios
+  //       .get(url)
+  //       .catch((err) => {
+  //         console.log("Err: ", err);
+  //       });
+  //       changeArr(response.data);
+  //       console.log("evs");
+  //       printEvents(events);
+  //   };
 
 
-  const printEvents=(data)=>{
+    // useEffect(() => {
+    //   console.log("fetched");
+    //   fetchProducts(url);
+     
+    // });
 
-    for(let i=0;i<data.length;i++){
-      console.log("EVENTSSS"+data.length);
-      console.log(data[i]["id"]); 
-      console.log(data[i]["title"]);
-      console.log(data[i]["start"]);
-      console.log(data[i]["end"]);
-      console.log(data[i]["color"]);
-  
-    // let ele={"id":data[i]["id"],"title":data[i]["program"]["name"],"start":data[i]["start_at"]
-    // ,"end":data[i]["end_at"]};
-    // newArr.push(ele);
-    //setNewArr([...newArr,ele]);
-    }
-  
-    }
-  
+    useLayoutEffect(() => {
+      console.log("UseLayoutEffect is called with the value of ");
+
+      console.log("fetcheddddd");
+    //  fetchProducts(url);
+
+  }, [url]);
+ 
+
+
+    const [newArr,setNewArr]=useState([]);
+const changeArr=(data)=>{
+
+for(let i=0;i<data.length;i++){
+  // console.log("newarr"); console.log(data[i]);
+  // console.log(data[i]["id"]); 
+  // console.log(data[i]["program"]["name"]);
+  // console.log(data[i]["start_at"]);
+  // console.log(data[i]["end_at"]);
+let ele={"id":data[i]["id"],"title":data[i]["program"]["name"],"start":data[i]["start_at"]
+,"end":data[i]["end_at"],"type": "event",
+"clientName": "Johan Le",
+"description": "Meeting daily",
+"color": "#FFE4C8"};
+events.push(ele);
+//setNewArr([...newArr,ele]);
+}
+// for(let i=0;i<newArr.length;i++){
+//   console.log("newarr2"); console.log(newArr[i]);
+//   console.log(newArr[i]["id"]); 
+//   console.log(newArr[i]["title"]);
+
+// }
+
+//console.log(newArr[0]["title"]);
+}
+
+
+const printEvents=(data)=>{
+
+  for(let i=0;i<data.length;i++){
+    console.log("EVENTSSS"+data.length); console.log(data[i]);
+    console.log(data[i]["id"]); 
+    console.log(data[i]["title"]);
+    console.log(data[i]["start_at"]);
+    console.log(data[i]["end_at"]);
+  // let ele={"id":data[i]["id"],"title":data[i]["program"]["name"],"start":data[i]["start_at"]
+  // ,"end":data[i]["end_at"]};
+  // newArr.push(ele);
+  //setNewArr([...newArr,ele]);
+  }
+
+  }
+
 
   // 
   const handleSelectEvent = (event) => {
@@ -287,7 +329,7 @@ const CalendarScreen = () => {
 
   return (
     <div>
-     
+    
 
       <SimpleModal isOpen={showForm} onClose={() => setShowForm(false)}>
         <EventForm

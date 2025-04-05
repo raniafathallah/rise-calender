@@ -1,9 +1,8 @@
 import moment from "moment";
 import { HiOutlineVideoCamera } from "react-icons/hi2";
-import "./Agenda.scss";
-import me from "~/assets/img/jpg/me.jpg";
+// import "./Agenda.scss";
+ 
 
-// CustomAgendaHeader
 export const CustomAgendaHeader = () => {
   return (
     <div className="custom-agenda-header">
@@ -38,7 +37,7 @@ export const CustomEvent = ({ event}) => {
           {moment(event.end).format("h:mm A")} GMT+7
         </div>
         {event.type !== "event" && (<div className="event-bottom">
-            <div className="event-avatar"><img src={me} alt="Profile"/></div>
+            <div className="event-avatar"><img src="" alt="Profile"/></div>
             <button className="event-action-button" onClick={viewProfile}>View Client Profile</button>
         </div>)}
       </div>

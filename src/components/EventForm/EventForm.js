@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment-timezone";
-import "./EventForm.scss";
+ import "./EventForm.scss";
 import {
   BsJustifyLeft,
   BsClock,

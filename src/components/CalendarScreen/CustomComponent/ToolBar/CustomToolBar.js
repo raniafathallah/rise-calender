@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BsChevronLeft, BsChevronRight, BsChevronDown } from "react-icons/bs";
 import { FaChevronLeft, FaChevronRight, FaChevronDown } from "react-icons/fa";
-import Button from '~/components/Button/Button';
+// import Button from '~/components/Button/Button';
+import Button from '../../../../components/Button/Button';
+
 import './CustomToolBar.scss';
 
 const CustomToolbar = ({ label, onNavigate, view, onView, localizer, isMobile, labelFormat}) => {

@@ -2,11 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import CalendarScreen from './components/CalendarScreen/CalendarScreen'; 
 
+import { GlobalProvider } from "./context/GlobalState";
+
 function App() {
   return (
     <div style={{ height: '100%', overflow: 'auto' }}>
       {/* Your content goes here */}
+      <GlobalProvider>
+
       <CalendarScreen />
+      </GlobalProvider>
+
     </div>
     // <div className="App">
     //   <header className="App-header">

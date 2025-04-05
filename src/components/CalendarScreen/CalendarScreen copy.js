@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -6,7 +6,7 @@ import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 
 import Appointment from "../Appointment/Appointment";
 import WebinarEvent from "../WebinarEvent/WebinarEvent";
-// import "./CalendarScreen.scss";
+import "./CalendarScreen.scss";
 import EventForm from "../EventForm/EventForm";
 import SimpleModal from "../Modal/SimpleModal";
 import CustomToolbar from "./CustomComponent/ToolBar/CustomToolBar";
@@ -18,21 +18,10 @@ import {
   CustomAgendaToolbar,
 } from "./CustomComponent/Agenda/Agenda.js";
 import axios from "axios";
-import  { useContext } from 'react';
-import { GlobalContext } from "../../context/GlobalState";
 
 const localizer = momentLocalizer(moment);
 
 const CalendarScreen = () => {
-
-  const { users } = useContext(GlobalContext);
- 
-
-
-  ///
-
-
-  ///
   // Get today's date
   const today = new Date();
   const tomorrow = new Date(today);
@@ -52,73 +41,119 @@ const CalendarScreen = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  //Initialize events with dynamic start and end dates based on today
-  // const [events, setEvents] = useState([
-  //   {
-  //     id: 1,
-  //     title: "Client Meeting",
-  //     start: new Date(today.setHours(10, 0, 0, 0)), // Today at 10:00 AM
-  //     end: new Date(today.setHours(11, 0, 0, 0)), // Today at 11:00 AM
-  //     type: "appointment",
-  //     clientName: "Johan Le",
-  //     description: "Meeting daily",
-  //     color: "#FFE4C8",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Webinar: How to make webinar on React",
-  //     start: new Date(tomorrow.setHours(15, 0, 0, 0)), // Tomorrow at 3:00 PM
-  //     end: new Date(tomorrow.setHours(16, 0, 0, 0)), // Tomorrow at 4:00 PM
-  //     type: "event",
-  //     eventUrl: "https://example.com/webinar",
-  //     color: "#F9BE81",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Interview with Johan Le",
-  //     start: new Date(totomorrow.setHours(9, 0, 0, 0)),
-  //     end: new Date(totomorrow.setHours(9, 30, 0, 0)),
-  //     type: "appointment",
-  //     clientName: "Johan Le",
-  //     description: "Meeting daily",
-  //     color: "#FFE4C8",
-  //   },
-  // //   // More events...
-  // ]);
+  const [evs,setEvs]=useState([]);
 
-  const [events, setEvents] = useState([]);
-
-  useLayoutEffect(() => {
-    setEvents(users);
-   // console.log("users in calen");
-   // printEvents(users);
-  })
-  
-//setEvents([...events,users])
-  // 
-  // const [events, setEvents] = useState(users);
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      title: "Client Meeting",
+      start: new Date(today.setHours(10, 0, 0, 0)), // Today at 10:00 AM
+      end: new Date(today.setHours(11, 0, 0, 0)), // Today at 11:00 AM
+      type: "appointment",
+      clientName: "Johan Le",
+      description: "Meeting daily",
+      color: "#FFE4C8",
+    },
+    {
+      id: 2,
+      title: "Webinar: How to make webinar on React",
+      start: new Date(tomorrow.setHours(15, 0, 0, 0)), // Tomorrow at 3:00 PM
+      end: new Date(tomorrow.setHours(16, 0, 0, 0)), // Tomorrow at 4:00 PM
+      type: "event",
+      eventUrl: "https://example.com/webinar",
+      color: "#F9BE81",
+    },
+    {
+      id: 3,
+      title: "Interview with Johan Le",
+      start: new Date(totomorrow.setHours(9, 0, 0, 0)),
+      end: new Date(totomorrow.setHours(9, 30, 0, 0)),
+      type: "appointment",
+      clientName: "Johan Le",
+      description: "Meeting daily",
+      color: "#FFE4C8",
+    },
+    // More events...
+  ]);
 
 
-  const printEvents=(data)=>{
+const[url,setUrl]=useState('https://api-461776259687.us-west2.run.app/events?program_type=game');
+   const fetchProducts =async (url) => {
+   
+      //  const response = await axios
+      //    .get(url)
+      //    .catch((err) => {
+      //      console.log("Err: ", err);
+      //    });
+  changeArr(response.data);
+ // setEvs([...evs,response.data]);
+  console.log("evs");
+  //console.log(evs);
 
-    for(let i=0;i<data.length;i++){
-      console.log("EVENTSSS"+data.length);
-      console.log(data[i]["id"]); 
-      console.log(data[i]["title"]);
-      console.log(data[i]["start"]);
-      console.log(data[i]["end"]);
-      console.log(data[i]["color"]);
-  
-    // let ele={"id":data[i]["id"],"title":data[i]["program"]["name"],"start":data[i]["start_at"]
-    // ,"end":data[i]["end_at"]};
-    // newArr.push(ele);
-    //setNewArr([...newArr,ele]);
-    }
-  
-    }
-  
+  //setEvents([...events,newArr]);
+  //events.push(newArr);
+ printEvents(events);
+ 
 
-  // 
+
+     };
+
+
+
+
+
+ 
+    useEffect(() => {
+      console.log("fetched");
+      fetchProducts(url);
+     
+    },[url]);
+    const [newArr,setNewArr]=useState([]);
+  // Initialize events with dynamic start and end dates based on today
+const changeArr=(data)=>{
+
+for(let i=0;i<data.length;i++){
+  // console.log("newarr"); console.log(data[i]);
+  // console.log(data[i]["id"]); 
+  // console.log(data[i]["program"]["name"]);
+  // console.log(data[i]["start_at"]);
+  // console.log(data[i]["end_at"]);
+let ele={"id":data[i]["id"],"title":data[i]["program"]["name"],"start":data[i]["start_at"]
+,"end":data[i]["end_at"],"type": "event",
+"clientName": "Johan Le",
+"description": "Meeting daily",
+"color": "#FFE4C8"};
+events.push(ele);
+//setNewArr([...newArr,ele]);
+}
+// for(let i=0;i<newArr.length;i++){
+//   console.log("newarr2"); console.log(newArr[i]);
+//   console.log(newArr[i]["id"]); 
+//   console.log(newArr[i]["title"]);
+
+// }
+
+//console.log(newArr[0]["title"]);
+}
+
+
+const printEvents=(data)=>{
+
+  for(let i=0;i<data.length;i++){
+    console.log("EVENTSSS"+data.length); console.log(data[i]);
+    console.log(data[i]["id"]); 
+    console.log(data[i]["title"]);
+    console.log(data[i]["start_at"]);
+    console.log(data[i]["end_at"]);
+  // let ele={"id":data[i]["id"],"title":data[i]["program"]["name"],"start":data[i]["start_at"]
+  // ,"end":data[i]["end_at"]};
+  // newArr.push(ele);
+  //setNewArr([...newArr,ele]);
+  }
+
+  }
+
+
   const handleSelectEvent = (event) => {
     console.log(event);
     setSelectedEvent(event);
@@ -287,8 +322,6 @@ const CalendarScreen = () => {
 
   return (
     <div>
-     
-
       <SimpleModal isOpen={showForm} onClose={() => setShowForm(false)}>
         <EventForm
           eventDetails={selectedEvent}
