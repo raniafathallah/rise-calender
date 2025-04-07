@@ -7,9 +7,6 @@
   "homepage": "https://github.com/raniafathallah/rise-calender",
   "dependencies": {
     "-": "^0.0.1",
-    "@babel/core": "^7.26.10",
-    "@babel/preset-env": "^7.26.9",
-    "@babel/preset-react": "^7.26.3",
     "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -53,7 +50,6 @@
     ]
   },
   "devDependencies": {
-    "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.3",
