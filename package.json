@@ -1,7 +1,6 @@
 {
   "name": "calendar-app",
   "version": "0.1.0",
-  "proxy": "https://api-461776259687.us-west2.run.app",
   "private": true,
   "main": "index.js",
   "homepage": "https://github.com/raniafathallah/rise-calender",
