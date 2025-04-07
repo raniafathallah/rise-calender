@@ -98,7 +98,7 @@ export const GlobalProvider = ({ children }) => {
        // console.log(response)
       //  console.log(response.data);
          changeArr(response.data);
-      //  console.log(response);
+        console.log(response);
      //   printEvents(events);
      //   GET_USERS(newArr);
    
